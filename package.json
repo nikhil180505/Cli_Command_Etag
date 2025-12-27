@@ -7,5 +7,20 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Nikhil choudhary",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikhil180505/Cli_Command_Etag.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/nikhil180505/Cli_Command_Etag/issues"
+  },
+  "homepage": "https://github.com/nikhil180505/Cli_Command_Etag#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3"
+  }
 }
