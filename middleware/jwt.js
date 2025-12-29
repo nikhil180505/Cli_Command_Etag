@@ -1,4 +1,4 @@
-const User = require('./Models/User.js')
+const User = require('../Models/User.js')
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken')
 
@@ -24,12 +24,13 @@ const GenerateJWTToken = async(user) =>{
 
 const authenticate = (req,res,next)=>{
     const authHeader = req.headers.authorization;
-    const token = authHeader.split(" ")[1];
-
-     if (!authHeader) {
+      if (!authHeader) {
     return res.status(401).json({ message: "No token" });
   }
 
+    const token = authHeader.split(" ")[1];
+
+   
      try{
         const payload =  jwt.verify(token, process.env.JWTSECRET);
         req.user = payload;
