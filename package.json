@@ -19,6 +19,7 @@
   "homepage": "https://github.com/nikhil180505/Cli_Command_Etag#readme",
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "express-rate-limit": "^8.2.1",

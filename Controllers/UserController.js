@@ -61,10 +61,20 @@ const login = async (req, res) => {
 
     // Generate JWT
     const token = await jwt.GenerateJWTToken(user);
+    const access_token = token[0];
+    const refresh_token = token[1];
 
+    //
+
+    res.cookie("refreshToken",refresh_token,{
+     httpOnly: true,
+    secure: true,
+    sameSite: "strict"
+   })
+   
     return res.status(200).json({
       message: 'Login successful',
-      token
+      access_token
     });
 
   } catch (error) {

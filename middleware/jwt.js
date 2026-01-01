@@ -2,6 +2,8 @@ const User = require('../Models/User.js')
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken')
 
+let refresh_token;
+
 const  ComparePassword = async(inputpassword,hashedpassword)=> {
     // console.log('hasdedpassword',hashedpassword)
     return await bcrypt.compare(inputpassword,hashedpassword)
@@ -9,16 +11,32 @@ const  ComparePassword = async(inputpassword,hashedpassword)=> {
 }
 
 const GenerateJWTToken = async(user) =>{
-    return  jwt.sign(
+    const access_token =    jwt.sign(
         {
             sub:user.id,
             role:user.role
         },
         process.env.JWTSECRET,
         {
-            expiresIn: "10m"
+            expiresIn: "1m"
         }
     )
+
+     refresh_token = jwt.sign(
+      {
+        sub:user.id,
+        role:user.role
+      },
+      process.env.REFRESH_SECRET,
+      {
+        expiresIn:"7d"
+      }
+    )
+
+   
+
+   return await [access_token,refresh_token];
+    
     
 }
 
@@ -33,6 +51,7 @@ const authenticate = (req,res,next)=>{
    
      try{
         const payload =  jwt.verify(token, process.env.JWTSECRET);
+        console.log("payload :",payload)
         req.user = payload;
         next()
      }catch(err){
